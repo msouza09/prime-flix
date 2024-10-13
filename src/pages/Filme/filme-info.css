@@ -38,6 +38,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.5s;
+    background-color: #009225 !important;
 }
 
 .area-buttons button:hover {

@@ -1,51 +1,52 @@
 import { useEffect, useState } from 'react';
 import './favoritos.css';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 function Favoritos() {
+    const [filmes, setFilmes] = useState([]);
 
-    const [filmes, setFilmes] = useState([])
-
-    useEffect(()=>{
+    useEffect(() => {
         const minhaLista = localStorage.getItem("@primeflix");
-        setFilmes(JSON.parse(minhaLista) || [])
+        setFilmes(JSON.parse(minhaLista) || []);
+    }, []);
 
-    }, [])
-
-    function excluirFilme(id){
-        let filtroFilmes = filmes.filter( (filme) => {
-            return (filme.id !== id)
-        })
+    function excluirFilme(id) {
+        const filtroFilmes = filmes.filter((filme) => filme.id !== id);
         setFilmes(filtroFilmes);
-        localStorage.setItem("@primeflix", JSON.stringify(filtroFilmes))
-        toast.success("Filme removido com sucesso")
+        localStorage.setItem("@primeflix", JSON.stringify(filtroFilmes));
+        toast.success("Filme removido com sucesso");
     }
 
     return (
-        <div className="meus-filmes">
+        <div className="container meus-filmes">
             <h1>Meus Filmes</h1>
 
             {filmes.length === 0 && <span>Você não possui nenhum filme salvo.</span>}
 
-        <ul>
-            {filmes.map((filme) => {
-                return (
-                    <li key={filme.id}>
-                        <span>{filme.title}</span>
-                        
-                        <div>
-                            <Link to={`/filme/${filme.id}`}>Ver detalhes</Link>
-                            <button onClick={() => excluirFilme(filme.id)}>Excluir</button>
-                        </div>
-                    </li>
-
-                )
-            })}
-        </ul>
-
+            {filmes.length > 0 && (
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filmes.map((filme) => (
+                            <tr key={filme.id}>
+                                <td>{filme.title}</td>
+                                <td>
+                                    <Link to={`/filme/${filme.id}`} className='detalhes btn btn-info me-2'>Ver detalhes</Link>
+                                    <button onClick={() => excluirFilme(filme.id)} className='btn btn-danger'>Excluir</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
-    )
+    );
 }
 
 export default Favoritos;
