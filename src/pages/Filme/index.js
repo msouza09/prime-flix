@@ -74,8 +74,8 @@ if(loading) {
       <strong>Avaliação: {filme.vote_average} / 10 </strong>
 
       <div className="area-buttons">
-        <button onClick={salvarFilme} >Salvar</button>
-        <button>
+        <button onClick={salvarFilme} className="salvar btn btn-info">Salvar</button>
+        <button className="btn btn-info">
           <a target="_blank" rel="external" href={`https://youtube.com/results?search_query=${filme.title} Trailer`}>
             Trailer
           </a>

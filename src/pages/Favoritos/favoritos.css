@@ -36,3 +36,18 @@ align-items: center;
     color: #00ff22;
     margin-right: 14px;
 }
+
+.detalhes {
+    background-color: #009225 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
+
+.detalhes:hover {
+    background-color: #006e1f !important;
+}
+
+.detalhes:active {
+    background-color: #024d15 !important;
+    transform: translateY(0);
+}
